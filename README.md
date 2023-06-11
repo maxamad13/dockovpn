@@ -17,7 +17,7 @@
 Out of the box stateless VPN server docker image which starts in just a few seconds and doesn't require persistent storage. To get it running,  just copy & paste the snippet below and follow instructions in your terminal:
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
--p 443:443/tcp -p 80:8080/tcp \
+-p 8443:8443/tcp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
@@ -45,7 +45,7 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 | :------: | :---------: | :-----------: |
 | NET_ADAPTER | Network adapter to use on the host machine | eth0 |
 | HOST_ADDR | Host address to advertise in the client config file | localhost |
-| HOST_TUN_PORT | Tunnel port to advertise in the client config file | 443 |
+| HOST_TUN_PORT | Tunnel port to advertise in the client config file | 8443 |
 | HOST_CONF_PORT | HTTP port on the host machine to download the client config file | 80 |
 
 **⚠️ Note:** In the provided code snippet we advertise the configuration suitable for the most users. We don't recommend setting custom 
@@ -56,7 +56,7 @@ More often you'd like to customize HOST_TUN_PORT and HOST_CONF_PORT. If this is 
 DOCKOVPN_CONFIG_PORT=<custom port>
 DOCKOVPN_TUNNEL_PORT=<custom port>
 docker run -it --rm --cap-add=NET_ADMIN \
--p $DOCKOVPN_TUNNEL_PORT:443/tcp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
+-p $DOCKOVPN_TUNNEL_PORT:8443/tcp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 -e HOST_CONF_PORT="$DOCKOVPN_CONFIG_PORT" \
 -e HOST_TUN_PORT="$DOCKOVPN_TUNNEL_PORT" \
@@ -86,7 +86,7 @@ After container was run using `docker run` command, it's possible to execute add
 Copy & paste the following command to run docker-openvpn:<br>
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
--p 443:443/tcp -p 80:8080/tcp \
+-p 8443:8443/tcp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```

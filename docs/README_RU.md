@@ -21,7 +21,7 @@
 Докеризированный VPN сервер, который работает прямо из коробки, не требует долгой настройки и постоянного места на жестком диске. Стартует за 2 секунды. Высокий уровень безопасности. Чтобы запустить, скопируйте и вставьте код ниже в окне терминала вашего сервера и следуйте инструкциям:
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
--p 443:443/tcp -p 80:8080/tcp \
+-p 8443:8443/tcp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
@@ -49,7 +49,7 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 | :------: | :---------: | :-----------: |
 | NET_ADAPTER | Сетевой адаптер для использования на серверной машине | eth0 |
 | HOST_ADDR | Адрес сервера, который будет использоваться в клиентском файле конфигурации | localhost |
-| HOST_TUN_PORT | Порт на сервере для передачи  VPN данных | 443 |
+| HOST_TUN_PORT | Порт на сервере для передачи  VPN данных | 8443 |
 | HOST_CONF_PORT | HTTP порт на сервере для скачивания клиентского файла конфигурации | 80 |
 
 **⚠️ Note:** В предоставленном фрагменте кода, мы используем конфигурацию, которая подойдет большинству пользователей. Мы не рекоммендуем менять NET_ADAPTER и HOST_ADDR на свои настройки если это абсолютно необходимо. HOST_ADDR определяется автоматически с помощью запуска подкомманды `$(curl -s https://api.ipify.org)`.
@@ -59,7 +59,7 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 DOCKOVPN_CONFIG_PORT=<custom port>
 DOCKOVPN_TUNNEL_PORT=<custom port>
 docker run -it --rm --cap-add=NET_ADMIN \
--p $DOCKOVPN_TUNNEL_PORT:443/tcp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
+-p $DOCKOVPN_TUNNEL_PORT:8443/tcp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 -e HOST_CONF_PORT="$DOCKOVPN_CONFIG_PORT" \
 -e HOST_TUN_PORT="$DOCKOVPN_TUNNEL_PORT" \
@@ -89,7 +89,7 @@ docker run -it --rm --cap-add=NET_ADMIN \
 Скопируйте код ниже и вставьте его в консоли вашего сервера:<br>
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
--p 443:443/tcp -p 80:8080/tcp \
+-p 8443:8443/tcp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
